@@ -8,9 +8,7 @@ import android.view.ViewGroup;
 import com.github.flickr.home.data.PhotoFeedDomain;
 import com.github.flickr.home.viewholder.PhotoViewHolder;
 import com.github.flickr.home.viewholder.PhotoViewHolderFactory;
-import com.github.flickr.scope.LateInit;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,25 +16,24 @@ import javax.inject.Inject;
 public class PhotoFeedAdapter extends RecyclerView.Adapter<PhotoViewHolder>
         implements PhotoFeedAdapterContract.View {
 
-    private final @NonNull
-    PhotoViewHolderFactory.Builder viewHolderFactoryBuilder;
-
-    private @LateInit PhotoFeedAdapterContract.Presenter presenter;
-    private List<PhotoFeedDomain.EntryDomain> entries = Collections.emptyList();
+    private final @NonNull PhotoViewHolderFactory.Builder viewHolderFactoryBuilder;
+    private final @NonNull PhotoFeedAdapterContract.Presenter presenter;
 
     @Inject
-    PhotoFeedAdapter(@NonNull PhotoViewHolderFactory.Builder viewHolderFactoryBuilder) {
-        this.viewHolderFactoryBuilder = viewHolderFactoryBuilder;
-    }
-
-    @Override
-    public void setPresenter(@NonNull PhotoFeedAdapterContract.Presenter presenter) {
+    PhotoFeedAdapter(@NonNull PhotoFeedAdapterContract.Presenter presenter,
+                     @NonNull PhotoViewHolderFactory.Builder viewHolderFactoryBuilder) {
         this.presenter = presenter;
+        this.viewHolderFactoryBuilder = viewHolderFactoryBuilder;
+        presenter.setView(this);
     }
 
     public void bindData(List<PhotoFeedDomain.EntryDomain> entries) {
-        this.entries = entries;
-        this.notifyDataSetChanged();
+        presenter.setEntries(entries);
+    }
+
+    @Override
+    public void onDataChanged() {
+        notifyDataSetChanged();
     }
 
     @Override
@@ -46,11 +43,11 @@ public class PhotoFeedAdapter extends RecyclerView.Adapter<PhotoViewHolder>
 
     @Override
     public void onBindViewHolder(PhotoViewHolder holder, int position) {
-        holder.bind(entries.get(position));
+        holder.bind(presenter.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return entries.size();
+        return presenter.getSize();
     }
 }

@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.github.flickr.R;
 import com.github.flickr.home.adapter.PhotoFeedAdapter;
 import com.github.flickr.home.adapter.PhotoFeedAdapterContract;
+import com.github.flickr.home.adapter.PhotoFeedAdapterPresenter;
 import com.github.flickr.home.data.PhotoFeedApiInteractor;
 import com.github.flickr.home.data.PhotoFeedInteractor;
 import com.github.flickr.home.viewholder.DaggerPhotoViewHolderFactory;
@@ -55,6 +56,11 @@ class HomeFragmentModule {
         @FragmentViewScope
         PhotoFeedAdapterContract.View provideAdapterView(
                 @NonNull PhotoFeedAdapter adapter);
+
+        @Binds
+        @FragmentViewScope
+        PhotoFeedAdapterContract.Presenter provideAdapterPresenter(
+                @NonNull PhotoFeedAdapterPresenter presenter);
 
         @Binds
         @FragmentViewScope
