@@ -6,10 +6,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.github.flickr.BaseAppComponent;
 import com.github.flickr.R;
 import com.github.flickr.base.BaseFragment;
+import com.github.flickr.home.adapter.PhotoFeedAdapter;
+import com.github.flickr.home.data.PhotoFeedDomain;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -23,13 +28,17 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
 
     @BindView(R.id.photos)
     RecyclerView photos;
+    @BindView(R.id.progress)
+    ProgressBar progress;
+    @Inject
+    PhotoFeedAdapter adapter;
 
     @Inject
     HomeFragmentContract.Presenter presenter;
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                                        Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
@@ -37,10 +46,22 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
         INJECTOR.createHomeComponent(getBaseComponent(), this)
                 .inject(this);
 
+        photos.setAdapter(adapter);
+
         presenter.init();
 
         return view;
 
+    }
+
+    @Override
+    public void bindData(List<PhotoFeedDomain.EntryDomain> entries) {
+        adapter.bindData(entries);
+    }
+
+    @Override
+    public void showProgress(boolean show) {
+        progress.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     private static class Injector {

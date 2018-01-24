@@ -8,19 +8,21 @@ import javax.inject.Inject;
 
 import rx.Observable;
 import rx.Single;
+import rx.functions.Func1;
 
 public class PhotoFeedApiInteractor implements PhotoFeedInteractor {
 
-    private final @NonNull
-    FlickrApiService flickrApi;
+    private final @NonNull FlickrApiService flickrApi;
+    private final @NonNull PhotoFeedDomainMapper mapper;
 
     @Inject
-    PhotoFeedApiInteractor(@NonNull FlickrApiService flickrApi) {
+    PhotoFeedApiInteractor(@NonNull FlickrApiService flickrApi,
+                           @NonNull PhotoFeedDomainMapper mapper) {
         this.flickrApi = flickrApi;
+        this.mapper = mapper;
     }
 
-    public @NonNull
-    Single<PhotoFeedDTO> getPhotos() {
-        return flickrApi.getPhotos();
+    public @NonNull Single<PhotoFeedDomain> getPhotos() {
+        return flickrApi.getPhotos().map(mapper);
     }
 }

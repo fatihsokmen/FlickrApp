@@ -6,5 +6,5 @@ import rx.Single;
 
 public interface PhotoFeedInteractor {
 
-    @NonNull Single<PhotoFeedDTO> getPhotos();
+    @NonNull Single<PhotoFeedDomain> getPhotos();
 }
