@@ -2,6 +2,8 @@ package com.github.flickr.home;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +26,8 @@ import butterknife.ButterKnife;
 
 public class HomeFragment extends BaseFragment implements HomeFragmentContract.View {
 
-    @NonNull Injector INJECTOR = new Injector();
+    @NonNull
+    Injector INJECTOR = new Injector();
 
     @BindView(R.id.photos)
     RecyclerView photos;
@@ -39,7 +42,7 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                                       Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
 
@@ -47,6 +50,7 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
                 .inject(this);
 
         photos.setAdapter(adapter);
+        photos.addItemDecoration(createElevatedItemDecoration());
 
         presenter.init();
 
@@ -62,6 +66,13 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
     @Override
     public void showProgress(boolean show) {
         progress.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    private RecyclerView.ItemDecoration createElevatedItemDecoration() {
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(),
+                DividerItemDecoration.VERTICAL);
+        itemDecoration.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.elevated_list_divider));
+        return itemDecoration;
     }
 
     private static class Injector {

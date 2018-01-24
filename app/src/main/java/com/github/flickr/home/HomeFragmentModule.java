@@ -40,7 +40,7 @@ class HomeFragmentModule {
         return DaggerPhotoViewHolderFactory
                 .builder()
                 .layoutModule(new PhotoViewHolderModule.PhotoViewHolderLayoutModule(
-                        R.layout.support_simple_spinner_dropdown_item));
+                        R.layout.view_feed_item));
     }
 
     @Module
