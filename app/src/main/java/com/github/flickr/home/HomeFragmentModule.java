@@ -2,8 +2,8 @@ package com.github.flickr.home;
 
 import android.support.annotation.NonNull;
 
-import com.github.flickr.home.data.PublicPhotosApiInteractor;
-import com.github.flickr.home.data.PublicPhotosInteractor;
+import com.github.flickr.home.data.PhotoFeedApiInteractor;
+import com.github.flickr.home.data.PhotoFeedInteractor;
 import com.github.flickr.scope.FragmentViewScope;
 
 import dagger.Binds;
@@ -38,7 +38,7 @@ class HomeFragmentModule {
 
         @Binds
         @FragmentViewScope
-        PublicPhotosInteractor provideApiInteractor(
-                PublicPhotosApiInteractor interactor);
+        PhotoFeedInteractor provideApiInteractor(
+                PhotoFeedApiInteractor interactor);
     }
 }
