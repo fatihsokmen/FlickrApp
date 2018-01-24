@@ -8,5 +8,6 @@ public interface HomeFragmentContract {
 
     interface Presenter {
 
+        void init();
     }
 }
