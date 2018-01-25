@@ -22,9 +22,9 @@ public class PhotoViewHolderView extends PhotoViewHolder
     @BindView(R.id.user_name)
     TextView userName;
     @BindView(R.id.user_photo)
-    ImageView userPhoto;
+    ImageView userPhotoView;
     @BindView(R.id.image)
-    ImageView image;
+    ImageView imageView;
 
     private final @NonNull PhotoViewHolderContract.Presenter presenter;
 
@@ -44,12 +44,17 @@ public class PhotoViewHolderView extends PhotoViewHolder
     }
 
     @Override
-    public void setAuthorName(String name) {
+    public void setAuthorName(@NonNull String name) {
         userName.setText(name);
     }
 
     @Override
-    public void setAuthorPhoto(String photo) {
-        Glide.with(itemView).load(photo).into(userPhoto);
+    public void setAuthorPhoto(@NonNull String photo) {
+        Glide.with(itemView).load(photo).into(userPhotoView);
+    }
+
+    @Override
+    public void setImageUrl(@NonNull String imageUrl) {
+        Glide.with(itemView).load(imageUrl).into(imageView);
     }
 }

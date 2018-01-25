@@ -1,23 +1,23 @@
 package com.github.flickr.scheduler;
 
-import com.github.flickr.scheduler.Scheduler;
+import android.support.annotation.NonNull;
 
 import rx.schedulers.Schedulers;
 
 public class TestScheduler implements Scheduler {
 
     @Override
-    public rx.Scheduler background() {
+    public @NonNull rx.Scheduler background() {
         return Schedulers.immediate();
     }
 
     @Override
-    public rx.Scheduler main() {
+    public @NonNull rx.Scheduler main() {
         return Schedulers.immediate();
     }
 
     @Override
-    public rx.Scheduler immediate() {
+    public @NonNull rx.Scheduler immediate() {
         return Schedulers.immediate();
     }
 }

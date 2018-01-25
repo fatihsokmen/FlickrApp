@@ -22,6 +22,7 @@ public class PhotoViewHolderPresenter implements PhotoViewHolderContract.Present
     @Override
     public void bindData(PhotoFeedDomain.EntryDomain entry) {
         view.setAuthorPhoto(entry.author.photo);
+        view.setImageUrl(entry.imageUrl);
         view.setAuthorName(entry.author.name);
     }
 }

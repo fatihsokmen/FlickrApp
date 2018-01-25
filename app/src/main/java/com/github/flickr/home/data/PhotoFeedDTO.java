@@ -1,9 +1,14 @@
 package com.github.flickr.home.data;
 
+import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
+import org.simpleframework.xml.util.Dictionary;
+import org.simpleframework.xml.util.Match;
+import org.simpleframework.xml.util.Resolver;
 
+import java.util.Collection;
 import java.util.List;
 
 @Root(name = "feed", strict = false)
@@ -19,13 +24,13 @@ public class PhotoFeedDTO {
         @Element
         public ContentDTO content;
         @Element(required = false)
-        public AuthorDTO author;
-        @Element(required = false)
-        public String link;
+        AuthorDTO author;
+        @ElementList(inline=true)
+        List<LinkDTO> links;
     }
 
     @Root(name = "content", strict = false)
-    public static class ContentDTO {
+    static class ContentDTO {
     }
 
     @Root(name = "author", strict = false)
@@ -33,7 +38,17 @@ public class PhotoFeedDTO {
         @Element
         public String name;
         @Element
-        public String buddyicon;
+        String buddyicon;
+    }
+
+    @Root(name="link")
+    public static class LinkDTO {
+        @Attribute
+        public String rel;
+        @Attribute
+        String type;
+        @Attribute
+        String href;
     }
 }
 

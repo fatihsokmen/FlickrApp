@@ -17,6 +17,8 @@ import static com.github.flickr.home.data.PhotoFeedDomain.EntryDomain;
 
 public class PhotoFeedDomainMapper implements Func1<PhotoFeedDTO, PhotoFeedDomain> {
 
+    @VisibleForTesting static final String IMAGE_JPEG = "image/jpeg";
+
     @Inject
     PhotoFeedDomainMapper() {
     }
@@ -31,10 +33,20 @@ public class PhotoFeedDomainMapper implements Func1<PhotoFeedDTO, PhotoFeedDomai
     }
 
     @VisibleForTesting EntryDomain mapEntry(EntryDTO entryDTO) {
-        return new EntryDomain(entryDTO.title, mapAuthor(entryDTO.author));
+        return new EntryDomain(entryDTO.title, mapUrl(entryDTO.links), mapAuthor(entryDTO.author));
     }
 
     @VisibleForTesting AuthorDomain mapAuthor(AuthorDTO author) {
         return new AuthorDomain(author.name, author.buddyicon);
     }
+
+    @VisibleForTesting String mapUrl(List<PhotoFeedDTO.LinkDTO> links) {
+        for (PhotoFeedDTO.LinkDTO linkDTO : links) {
+            if (IMAGE_JPEG.equalsIgnoreCase(linkDTO.type)) {
+                return linkDTO.href;
+            }
+        }
+        return null;
+    }
+
 }

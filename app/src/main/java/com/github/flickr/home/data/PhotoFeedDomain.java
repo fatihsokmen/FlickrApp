@@ -20,11 +20,14 @@ public class PhotoFeedDomain {
     public static class EntryDomain {
 
         public final @NonNull String title;
+        public final @NonNull String imageUrl;
         public final @NonNull AuthorDomain author;
 
         EntryDomain(@NonNull String title,
+                    @NonNull String imageUrl,
                     @NonNull AuthorDomain author) {
             this.title = title;
+            this.imageUrl = imageUrl;
             this.author = author;
         }
     }
@@ -34,8 +37,7 @@ public class PhotoFeedDomain {
         public final @NonNull String name;
         public final @NonNull String photo;
 
-        AuthorDomain(@NonNull String name,
-                     @NonNull String photo) {
+        AuthorDomain(@NonNull String name, @NonNull String photo) {
             this.name = name;
             this.photo = photo;
         }
