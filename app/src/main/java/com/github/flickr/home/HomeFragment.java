@@ -66,9 +66,9 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
         presenter.clearSubscriptions();
+        super.onDestroyView();
     }
 
     private static class Injector {
