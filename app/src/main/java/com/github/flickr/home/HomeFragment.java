@@ -26,19 +26,18 @@ import butterknife.ButterKnife;
 
 public class HomeFragment extends BaseFragment implements HomeFragmentContract.View {
 
-    @NonNull
-    Injector INJECTOR = new Injector();
+    @NonNull Injector INJECTOR = new Injector();
 
     @BindView(R.id.photos)
     RecyclerView photos;
     @BindView(R.id.progress)
     ProgressBar progress;
-    @Inject
-    PhotoFeedAdapter adapter;
 
-    @Inject
-    HomeFragmentContract.Presenter presenter;
+    @Inject PhotoFeedAdapter adapter;
 
+    @Inject HomeFragmentContract.Presenter presenter;
+
+    @Inject RecyclerView.ItemDecoration itemDecoration;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -46,16 +45,14 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
 
-        INJECTOR.createHomeComponent(getBaseComponent(), this)
-                .inject(this);
+        INJECTOR.createHomeComponent(getBaseComponent(), this).inject(this);
 
         photos.setAdapter(adapter);
-        photos.addItemDecoration(createElevatedItemDecoration());
+        photos.addItemDecoration(itemDecoration);
 
         presenter.init();
 
         return view;
-
     }
 
     @Override
@@ -66,14 +63,6 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
     @Override
     public void showProgress(boolean show) {
         progress.setVisibility(show ? View.VISIBLE : View.GONE);
-    }
-
-    private RecyclerView.ItemDecoration createElevatedItemDecoration() {
-        DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(),
-                DividerItemDecoration.VERTICAL);
-        //noinspection ConstantConditions
-        itemDecoration.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.elevated_list_divider));
-        return itemDecoration;
     }
 
     private static class Injector {

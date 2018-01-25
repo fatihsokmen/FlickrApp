@@ -1,6 +1,10 @@
 package com.github.flickr.home;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.RecyclerView;
 
 import com.github.flickr.R;
 import com.github.flickr.home.adapter.PhotoFeedAdapter;
@@ -43,6 +47,17 @@ class HomeFragmentModule {
                 .layoutModule(new PhotoViewHolderModule.PhotoViewHolderLayoutModule(
                         R.layout.view_feed_item));
     }
+
+    @Provides
+    @FragmentViewScope
+    RecyclerView.ItemDecoration provideItemDecoration(@NonNull Context context) {
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(context,
+                DividerItemDecoration.VERTICAL);
+        //noinspection ConstantConditions
+        itemDecoration.setDrawable(ContextCompat.getDrawable(context, R.drawable.elevated_list_divider));
+        return itemDecoration;
+    }
+
 
     @Module
     public interface Bindings {

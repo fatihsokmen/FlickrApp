@@ -1,6 +1,9 @@
 package com.github.flickr;
 
 
+import android.app.Application;
+import android.content.Context;
+
 import com.github.flickr.scheduler.Scheduler;
 import com.github.flickr.scheduler.SchedulerImpl;
 
@@ -20,6 +23,11 @@ class AppModule {
         @Binds
         @Singleton
         Scheduler provideScheduler(SchedulerImpl impl);
+
+        @Binds
+        @Singleton
+        Context provideApplicationContext(Application impl);
+
 
     }
 }

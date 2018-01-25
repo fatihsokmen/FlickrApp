@@ -2,6 +2,8 @@ package com.github.flickr;
 
 
 import android.app.Application;
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 
 import com.github.flickr.api.ApiModule;
 import com.github.flickr.api.FlickrApiService;
@@ -10,6 +12,8 @@ import com.github.flickr.scheduler.Scheduler;
 import dagger.BindsInstance;
 
 public interface BaseAppComponent {
+
+    Context provideApplicationContext();
 
     Scheduler provideScheduler();
 
