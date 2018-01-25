@@ -20,11 +20,13 @@ public class PhotoViewHolderView extends PhotoViewHolder
         implements PhotoViewHolderContract.View {
 
     @BindView(R.id.user_name)
-    TextView userName;
+    TextView userNameView;
     @BindView(R.id.user_photo)
     ImageView userPhotoView;
     @BindView(R.id.image)
     ImageView imageView;
+    @BindView(R.id.title)
+    TextView titleView;
 
     private final @NonNull PhotoViewHolderContract.Presenter presenter;
 
@@ -44,8 +46,13 @@ public class PhotoViewHolderView extends PhotoViewHolder
     }
 
     @Override
+    public void setTitle(String title) {
+        titleView.setText(title);
+    }
+
+    @Override
     public void setAuthorName(@NonNull String name) {
-        userName.setText(name);
+        userNameView.setText(name);
     }
 
     @Override

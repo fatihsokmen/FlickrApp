@@ -21,16 +21,12 @@ public class PhotoFeedDTO {
     public static class EntryDTO {
         @Element
         public String title;
-        @Element
-        public ContentDTO content;
         @Element(required = false)
         AuthorDTO author;
         @ElementList(inline=true)
         List<LinkDTO> links;
-    }
-
-    @Root(name = "content", strict = false)
-    static class ContentDTO {
+        @Element
+        String published;
     }
 
     @Root(name = "author", strict = false)

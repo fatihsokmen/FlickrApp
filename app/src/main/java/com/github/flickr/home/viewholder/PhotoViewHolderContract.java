@@ -13,6 +13,8 @@ public class PhotoViewHolderContract {
         void setAuthorName(@NonNull String name);
 
         void setImageUrl(@NonNull String imageUrl);
+
+        void setTitle(String title);
     }
 
     public interface Presenter {

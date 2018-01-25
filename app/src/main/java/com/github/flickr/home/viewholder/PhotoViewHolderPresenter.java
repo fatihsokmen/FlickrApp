@@ -24,5 +24,6 @@ public class PhotoViewHolderPresenter implements PhotoViewHolderContract.Present
         view.setAuthorPhoto(entry.author.photo);
         view.setImageUrl(entry.imageUrl);
         view.setAuthorName(entry.author.name);
+        view.setTitle(entry.title);
     }
 }
