@@ -56,13 +56,19 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
     }
 
     @Override
-    public void bindData(List<PhotoFeedDomain.EntryDomain> entries) {
+    public void bindData(@NonNull List<PhotoFeedDomain.EntryDomain> entries) {
         adapter.bindData(entries);
     }
 
     @Override
     public void showProgress(boolean show) {
         progress.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.clearSubscriptions();
     }
 
     private static class Injector {

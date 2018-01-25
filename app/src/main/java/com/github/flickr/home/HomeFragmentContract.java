@@ -18,5 +18,7 @@ public interface HomeFragmentContract {
     interface Presenter {
 
         void init();
+
+        void clearSubscriptions();
     }
 }

@@ -11,6 +11,7 @@ import com.github.flickr.scheduler.Scheduler;
 import javax.inject.Inject;
 
 import rx.SingleSubscriber;
+import rx.subscriptions.CompositeSubscription;
 
 public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
 
@@ -18,10 +19,13 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
     private final @NonNull PhotoFeedInteractor apiInteractor;
     private final @NonNull Scheduler scheduler;
 
+    private CompositeSubscription subscriptions = new CompositeSubscription();
+
     @Inject
-    public HomeFragmentPresenter(@NonNull HomeFragmentContract.View view,
-                          @NonNull PhotoFeedInteractor apiInteractor,
-                          @NonNull Scheduler scheduler) {
+    public HomeFragmentPresenter(
+            @NonNull HomeFragmentContract.View view,
+            @NonNull PhotoFeedInteractor apiInteractor,
+            @NonNull Scheduler scheduler) {
         this.view = view;
         this.apiInteractor = apiInteractor;
         this.scheduler = scheduler;
@@ -31,7 +35,7 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
     public void init() {
         view.showProgress(true);
 
-        apiInteractor.getPhotos()
+        subscriptions.add(apiInteractor.getPhotos()
                 .subscribeOn(scheduler.background())
                 .observeOn(scheduler.main())
                 .subscribe(new SingleSubscriber<PhotoFeedDomain>() {
@@ -45,6 +49,11 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
                     public void onError(Throwable error) {
                         view.showProgress(false);
                     }
-                });
+                }));
+    }
+
+    @Override
+    public void clearSubscriptions() {
+        subscriptions.clear();
     }
 }
