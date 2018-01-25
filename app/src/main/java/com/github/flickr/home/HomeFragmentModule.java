@@ -7,6 +7,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 
 import com.github.flickr.R;
+import com.github.flickr.home.data.PhotoFeedApiService;
 import com.github.flickr.home.adapter.PhotoFeedAdapter;
 import com.github.flickr.home.adapter.PhotoFeedAdapterContract;
 import com.github.flickr.home.adapter.PhotoFeedAdapterPresenter;
@@ -20,6 +21,7 @@ import com.github.flickr.scope.FragmentViewScope;
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
+import retrofit2.Retrofit;
 
 @Module(includes = {
         HomeFragmentModule.Bindings.class
@@ -38,6 +40,11 @@ class HomeFragmentModule {
         return view;
     }
 
+    @Provides
+    @FragmentViewScope
+    PhotoFeedApiService provideApiService(@NonNull Retrofit retrofit) {
+        return retrofit.create(PhotoFeedApiService.class);
+    }
 
     @Provides
     @FragmentViewScope

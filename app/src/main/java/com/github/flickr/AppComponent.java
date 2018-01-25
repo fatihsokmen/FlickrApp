@@ -1,14 +1,12 @@
 package com.github.flickr;
 
-import com.github.flickr.api.ApiModule;
-
 import javax.inject.Singleton;
 
 import dagger.Component;
 
 @Component(modules = {
         AppModule.class,
-        ApiModule.class
+        NetModule.class
 })
 @Singleton
 public interface AppComponent extends BaseAppComponent {

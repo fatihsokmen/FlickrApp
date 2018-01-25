@@ -1,8 +1,6 @@
 package com.github.flickr.home;
 
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.widget.Toast;
 
 import com.github.flickr.home.data.PhotoFeedDomain;
 import com.github.flickr.home.data.PhotoFeedInteractor;

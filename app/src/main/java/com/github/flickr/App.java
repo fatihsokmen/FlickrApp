@@ -2,8 +2,6 @@ package com.github.flickr;
 
 import android.app.Application;
 
-import com.github.flickr.api.ApiModule;
-
 public class App extends Application {
 
     private BaseAppComponent baseComponent;
@@ -13,7 +11,7 @@ public class App extends Application {
         super.onCreate();
         baseComponent = DaggerAppComponent.builder()
                 .application(this)
-                .apiModule(new ApiModule())
+                .apiModule(new NetModule())
                 .build();
     }
 

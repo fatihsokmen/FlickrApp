@@ -3,13 +3,11 @@ package com.github.flickr;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 
-import com.github.flickr.api.ApiModule;
-import com.github.flickr.api.FlickrApiService;
 import com.github.flickr.scheduler.Scheduler;
 
 import dagger.BindsInstance;
+import retrofit2.Retrofit;
 
 public interface BaseAppComponent {
 
@@ -17,7 +15,7 @@ public interface BaseAppComponent {
 
     Scheduler provideScheduler();
 
-    FlickrApiService provideFlickrApi();
+    Retrofit provideRetrofit();
 
     interface Builder<C extends BaseAppComponent, B extends Builder<C, B>> {
 
@@ -25,7 +23,7 @@ public interface BaseAppComponent {
         B application(Application application);
 
         @BindsInstance
-        B apiModule(ApiModule apiModule);
+        B apiModule(NetModule apiModule);
 
         C build();
     }
