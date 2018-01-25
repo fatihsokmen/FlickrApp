@@ -1,6 +1,8 @@
 package com.github.flickr.home.data;
 
 
+import android.support.annotation.VisibleForTesting;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,11 +30,11 @@ public class PhotoFeedDomainMapper implements Func1<PhotoFeedDTO, PhotoFeedDomai
         return new PhotoFeedDomain(entryDomains);
     }
 
-    private EntryDomain mapEntry(EntryDTO entryDTO) {
+    @VisibleForTesting EntryDomain mapEntry(EntryDTO entryDTO) {
         return new EntryDomain(entryDTO.title, mapAuthor(entryDTO.author));
     }
 
-    private AuthorDomain mapAuthor(AuthorDTO author) {
+    @VisibleForTesting AuthorDomain mapAuthor(AuthorDTO author) {
         return new AuthorDomain(author.name, author.buddyicon);
     }
 }

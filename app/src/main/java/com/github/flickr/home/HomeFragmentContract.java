@@ -1,5 +1,7 @@
 package com.github.flickr.home;
 
+import android.support.annotation.NonNull;
+
 import com.github.flickr.home.data.PhotoFeedDomain;
 
 import java.util.List;
@@ -10,7 +12,7 @@ public interface HomeFragmentContract {
 
         void showProgress(boolean show);
 
-        void bindData(List<PhotoFeedDomain.EntryDomain> entries);
+        void bindData(@NonNull List<PhotoFeedDomain.EntryDomain> entries);
     }
 
     interface Presenter {

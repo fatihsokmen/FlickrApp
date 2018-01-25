@@ -50,4 +50,7 @@ dependencies {
 
 
     testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-android:2.7.10'
+    testImplementation 'com.flextrade.jfixture:jfixture:2.7.2'
+
 }

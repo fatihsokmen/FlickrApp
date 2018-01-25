@@ -22,4 +22,9 @@ public class SchedulerImpl implements Scheduler {
     public @NonNull rx.Scheduler main() {
         return AndroidSchedulers.mainThread();
     }
+
+    @Override
+    public @NonNull rx.Scheduler immediate() {
+        return Schedulers.immediate();
+    }
 }

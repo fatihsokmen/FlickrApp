@@ -71,6 +71,7 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
     private RecyclerView.ItemDecoration createElevatedItemDecoration() {
         DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL);
+        //noinspection ConstantConditions
         itemDecoration.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.elevated_list_divider));
         return itemDecoration;
     }

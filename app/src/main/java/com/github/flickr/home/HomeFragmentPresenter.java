@@ -19,7 +19,7 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
     private final @NonNull Scheduler scheduler;
 
     @Inject
-    HomeFragmentPresenter(@NonNull HomeFragmentContract.View view,
+    public HomeFragmentPresenter(@NonNull HomeFragmentContract.View view,
                           @NonNull PhotoFeedInteractor apiInteractor,
                           @NonNull Scheduler scheduler) {
         this.view = view;
