@@ -1,4 +1,4 @@
-package com.github.flickr.scope;
+package com.github.flickr.dependency.scope;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -7,5 +7,5 @@ import javax.inject.Scope;
 
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
-public @interface FragmentViewScope {
+public @interface ViewHolderScope {
 }

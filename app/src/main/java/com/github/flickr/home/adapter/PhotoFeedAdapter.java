@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import com.github.flickr.home.HomeFragmentContract;
 import com.github.flickr.home.data.PhotoFeedDomain;
 import com.github.flickr.home.viewholder.PhotoViewHolder;
 import com.github.flickr.home.viewholder.PhotoViewHolderFactory;

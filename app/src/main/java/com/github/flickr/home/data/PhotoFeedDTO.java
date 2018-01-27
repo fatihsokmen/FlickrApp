@@ -25,8 +25,6 @@ public class PhotoFeedDTO {
         AuthorDTO author;
         @ElementList(inline=true)
         List<LinkDTO> links;
-        @Element
-        String published;
     }
 
     @Root(name = "author", strict = false)

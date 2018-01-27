@@ -14,8 +14,8 @@ import static org.mockito.Mockito.verify;
 
 public class PhotoViewHolderPresenterTest {
 
-    @Mock
-    PhotoViewHolderContract.View mockView;
+    private @Mock PhotoViewHolderContract.View mockView;
+    private @Mock PhotoViewHolderContract.Interactions mockInteractions;
 
     private PhotoViewHolderPresenter sut;
     private JFixture fixture;
@@ -24,7 +24,7 @@ public class PhotoViewHolderPresenterTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         FixtureAnnotations.initFixtures(this, fixture = new JFixture());
-        sut = new PhotoViewHolderPresenter();
+        sut = new PhotoViewHolderPresenter(mockInteractions);
         sut.setView(mockView);
     }
 

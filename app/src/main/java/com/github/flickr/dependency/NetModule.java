@@ -1,7 +1,13 @@
-package com.github.flickr;
+package com.github.flickr.dependency;
 
 import android.app.Application;
+import android.content.Context;
 import android.support.annotation.NonNull;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+import com.github.flickr.dependency.download.GlideImageDownloader;
+import com.github.flickr.dependency.download.ImageDownloader;
 
 import javax.inject.Singleton;
 
@@ -15,7 +21,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 @Module
-class NetModule {
+public class NetModule {
 
     private final static String baseUrl = "https://api.flickr.com/services/";
 

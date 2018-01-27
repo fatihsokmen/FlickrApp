@@ -7,16 +7,16 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 
 import com.github.flickr.R;
-import com.github.flickr.home.data.PhotoFeedApiService;
 import com.github.flickr.home.adapter.PhotoFeedAdapter;
 import com.github.flickr.home.adapter.PhotoFeedAdapterContract;
 import com.github.flickr.home.adapter.PhotoFeedAdapterPresenter;
 import com.github.flickr.home.data.PhotoFeedApiInteractor;
+import com.github.flickr.home.data.PhotoFeedApiService;
 import com.github.flickr.home.data.PhotoFeedInteractor;
 import com.github.flickr.home.viewholder.DaggerPhotoViewHolderFactory;
 import com.github.flickr.home.viewholder.PhotoViewHolderFactory;
-import com.github.flickr.home.viewholder.PhotoViewHolderModule;
-import com.github.flickr.scope.FragmentViewScope;
+import com.github.flickr.home.viewholder.PhotoViewHolderModule.PhotoViewHolderLayoutModule;
+import com.github.flickr.dependency.scope.FragmentViewScope;
 
 import dagger.Binds;
 import dagger.Module;
@@ -48,11 +48,12 @@ class HomeFragmentModule {
 
     @Provides
     @FragmentViewScope
-    PhotoViewHolderFactory.Builder provideViewHolderFactory() {
+    PhotoViewHolderFactory.Builder provideViewHolderFactory(
+            @NonNull HomeFragmentContract.Interactions interactions) {
         return DaggerPhotoViewHolderFactory
                 .builder()
-                .layoutModule(new PhotoViewHolderModule.PhotoViewHolderLayoutModule(
-                        R.layout.view_feed_item));
+                .viewHolderInteractions(interactions)
+                .layoutModule(new PhotoViewHolderLayoutModule(R.layout.view_feed_item));
     }
 
     @Provides
@@ -87,6 +88,11 @@ class HomeFragmentModule {
         @Binds
         @FragmentViewScope
         PhotoFeedInteractor provideApiInteractor(PhotoFeedApiInteractor interactor);
+
+        @Binds
+        @FragmentViewScope
+        HomeFragmentContract.Interactions provideInteractions(HomeFragmentInteractions interactions);
+
     }
 
 }

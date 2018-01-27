@@ -1,4 +1,4 @@
-package com.github.flickr.scheduler;
+package com.github.flickr.dependency.scheduler;
 
 import android.support.annotation.NonNull;
 

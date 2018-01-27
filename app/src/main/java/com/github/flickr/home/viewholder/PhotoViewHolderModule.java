@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.flickr.scope.ViewHolderScope;
+import com.github.flickr.dependency.scope.ViewHolderScope;
 
 import dagger.Binds;
 import dagger.Module;

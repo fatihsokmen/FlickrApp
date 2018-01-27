@@ -1,10 +1,12 @@
-package com.github.flickr;
+package com.github.flickr.dependency;
 
 
 import android.app.Application;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
-import com.github.flickr.scheduler.Scheduler;
+import com.github.flickr.dependency.download.ImageDownloader;
+import com.github.flickr.dependency.scheduler.Scheduler;
 
 import dagger.BindsInstance;
 import retrofit2.Retrofit;
@@ -17,6 +19,8 @@ public interface BaseAppComponent {
 
     Retrofit provideRetrofit();
 
+    ImageDownloader provideImageDownloader();
+
     interface Builder<C extends BaseAppComponent, B extends Builder<C, B>> {
 
         @BindsInstance
@@ -24,6 +28,9 @@ public interface BaseAppComponent {
 
         @BindsInstance
         B apiModule(NetModule apiModule);
+
+        @BindsInstance
+        B downloadModule(DownloadModule apiModule);
 
         C build();
     }

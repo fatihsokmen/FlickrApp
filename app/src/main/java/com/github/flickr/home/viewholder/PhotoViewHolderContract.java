@@ -22,5 +22,16 @@ public class PhotoViewHolderContract {
         void setView(View view);
 
         void bindData(PhotoFeedDomain.EntryDomain entry);
+
+        void onSharePhotoClicked();
+
+        void onSavePhotoClicked();
+    }
+
+    public interface Interactions {
+
+        void onSharePhoto(@NonNull String photoUrl);
+
+        void onSavePhoto(@NonNull String photoUrl);
     }
 }

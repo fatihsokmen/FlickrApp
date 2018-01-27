@@ -1,7 +1,7 @@
 package com.github.flickr.home;
 
-import com.github.flickr.BaseAppComponent;
-import com.github.flickr.scope.FragmentViewScope;
+import com.github.flickr.dependency.BaseAppComponent;
+import com.github.flickr.dependency.scope.FragmentViewScope;
 
 import dagger.Component;
 

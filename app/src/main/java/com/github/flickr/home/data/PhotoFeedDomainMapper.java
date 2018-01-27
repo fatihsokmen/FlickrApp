@@ -20,9 +20,6 @@ public class PhotoFeedDomainMapper implements Func1<PhotoFeedDTO, PhotoFeedDomai
     @VisibleForTesting
     static final String IMAGE_JPEG = "image/jpeg";
 
-    @VisibleForTesting
-    static final String TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZ";
-
     @Inject
     PhotoFeedDomainMapper() {
     }

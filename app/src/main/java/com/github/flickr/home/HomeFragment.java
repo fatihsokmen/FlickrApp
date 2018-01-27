@@ -1,8 +1,11 @@
 package com.github.flickr.home;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.github.flickr.App;
-import com.github.flickr.BaseAppComponent;
+import com.github.flickr.dependency.BaseAppComponent;
 import com.github.flickr.R;
 import com.github.flickr.home.adapter.PhotoFeedAdapter;
 import com.github.flickr.home.data.PhotoFeedDomain;
@@ -25,18 +28,22 @@ import butterknife.ButterKnife;
 
 public class HomeFragment extends Fragment implements HomeFragmentContract.View {
 
-    @NonNull Injector INJECTOR = new Injector();
+    @NonNull
+    Injector INJECTOR = new Injector();
 
     @BindView(R.id.photos)
     RecyclerView photos;
     @BindView(R.id.progress)
     ProgressBar progress;
 
-    @Inject PhotoFeedAdapter adapter;
+    @Inject
+    PhotoFeedAdapter adapter;
 
-    @Inject HomeFragmentContract.Presenter presenter;
+    @Inject
+    HomeFragmentContract.Presenter presenter;
 
-    @Inject RecyclerView.ItemDecoration itemDecoration;
+    @Inject
+    RecyclerView.ItemDecoration itemDecoration;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -65,12 +72,29 @@ public class HomeFragment extends Fragment implements HomeFragmentContract.View 
     }
 
     @Override
+    public void showMessage(@NonNull String message) {
+        //noinspection ConstantConditions
+        Snackbar.make(getView(), message, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showError(@NonNull String message) {
+        //noinspection ConstantConditions
+        Snackbar snackbar = Snackbar.make(getView(), message, Snackbar.LENGTH_LONG);
+        //noinspection ConstantConditions
+        snackbar.getView().setBackground(
+                ContextCompat.getDrawable(getContext(), R.color.colorAccent));
+        snackbar.show();
+    }
+
+    @Override
     public void onDestroyView() {
         presenter.clearSubscriptions();
         super.onDestroyView();
     }
 
     private BaseAppComponent getBaseComponent() {
+        //noinspection ConstantConditions
         return ((App) getActivity().getApplication()).getBaseComponent();
     }
 

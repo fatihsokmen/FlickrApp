@@ -4,7 +4,7 @@ import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 
 import com.github.flickr.home.data.PhotoFeedDomain;
-import com.github.flickr.scope.LateInit;
+import com.github.flickr.dependency.scope.LateInit;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,7 +27,7 @@ public class PhotoFeedAdapterPresenter implements PhotoFeedAdapterContract.Prese
     }
 
     @Override
-    public void setEntries(List<PhotoFeedDomain.EntryDomain> entries) {
+    public void setEntries(@NonNull List<PhotoFeedDomain.EntryDomain> entries) {
         this.entries = entries;
         view.onDataChanged();
     }

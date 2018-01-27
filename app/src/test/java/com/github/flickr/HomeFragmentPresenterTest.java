@@ -2,11 +2,12 @@ package com.github.flickr;
 
 import com.flextrade.jfixture.FixtureAnnotations;
 import com.flextrade.jfixture.annotations.Fixture;
+import com.github.flickr.dependency.download.ImageDownloader;
 import com.github.flickr.home.HomeFragmentContract;
 import com.github.flickr.home.HomeFragmentPresenter;
 import com.github.flickr.home.data.PhotoFeedDomain;
 import com.github.flickr.home.data.PhotoFeedInteractor;
-import com.github.flickr.scheduler.TestScheduler;
+import com.github.flickr.dependency.scheduler.TestScheduler;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,13 +22,11 @@ import static org.mockito.Mockito.when;
 
 public class HomeFragmentPresenterTest {
 
-    @Mock
-    HomeFragmentContract.View mockView;
-    @Mock
-    PhotoFeedInteractor mockApiInteractor;
+    private @Mock HomeFragmentContract.View mockView;
+    private @Mock PhotoFeedInteractor mockApiInteractor;
+    private @Mock ImageDownloader mockImageDownloader;
 
-    @Fixture
-    PhotoFeedDomain fixtFeedDomain;
+    private @Fixture PhotoFeedDomain fixtFeedDomain;
 
     private HomeFragmentPresenter sut;
 
@@ -35,7 +34,7 @@ public class HomeFragmentPresenterTest {
     public void setUp() {
         FixtureAnnotations.initFixtures(this);
         MockitoAnnotations.initMocks(this);
-        sut = new HomeFragmentPresenter(mockView, mockApiInteractor, new TestScheduler());
+        sut = new HomeFragmentPresenter(mockView, mockApiInteractor, mockImageDownloader, new TestScheduler());
     }
 
     @Test

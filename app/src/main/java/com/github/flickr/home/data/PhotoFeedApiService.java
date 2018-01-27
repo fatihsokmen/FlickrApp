@@ -1,7 +1,5 @@
 package com.github.flickr.home.data;
 
-import com.github.flickr.home.data.PhotoFeedDTO;
-
 import retrofit2.http.GET;
 import rx.Single;
 

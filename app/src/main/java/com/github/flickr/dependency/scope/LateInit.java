@@ -1,4 +1,4 @@
-package com.github.flickr.scope;
+package com.github.flickr.dependency.scope;
 
 import android.support.annotation.NonNull;
 

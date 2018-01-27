@@ -1,7 +1,5 @@
 package com.github.flickr.home.viewholder;
 
-import android.content.Context;
-import android.media.Image;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,14 +8,15 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.github.flickr.R;
 import com.github.flickr.home.data.PhotoFeedDomain;
+import com.github.flickr.dependency.scope.LateInit;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class PhotoViewHolderView extends PhotoViewHolder
-        implements PhotoViewHolderContract.View {
+public class PhotoViewHolderView extends PhotoViewHolder implements PhotoViewHolderContract.View {
 
     @BindView(R.id.user_name)
     TextView userNameView;
@@ -63,5 +62,15 @@ public class PhotoViewHolderView extends PhotoViewHolder
     @Override
     public void setImageUrl(@NonNull String imageUrl) {
         Glide.with(itemView).load(imageUrl).into(imageView);
+    }
+
+    @OnClick(R.id.save_button)
+    void onSavePhotoClicked() {
+        presenter.onSavePhotoClicked();
+    }
+
+    @OnClick(R.id.share_button)
+    void onSharePhotoClicked() {
+        presenter.onSharePhotoClicked();
     }
 }

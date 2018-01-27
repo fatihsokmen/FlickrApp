@@ -3,7 +3,8 @@ package com.github.flickr.home.viewholder;
 
 import android.view.ViewGroup;
 
-import com.github.flickr.scope.ViewHolderScope;
+import com.github.flickr.home.viewholder.PhotoViewHolderModule.PhotoViewHolderLayoutModule;
+import com.github.flickr.dependency.scope.ViewHolderScope;
 
 import dagger.BindsInstance;
 import dagger.Component;
@@ -24,8 +25,10 @@ public interface PhotoViewHolderFactory {
         @BindsInstance
         Builder parentView(ViewGroup parentView);
 
-        Builder layoutModule(
-                PhotoViewHolderModule.PhotoViewHolderLayoutModule viewHolderLayoutModule);
+        @BindsInstance
+        Builder viewHolderInteractions(PhotoViewHolderContract.Interactions interactions);
+
+        Builder layoutModule(PhotoViewHolderLayoutModule layoutModule);
 
         PhotoViewHolderFactory build();
 
